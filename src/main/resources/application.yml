@@ -1,0 +1,6 @@
+server:
+  port: 8083
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://victorrodriguesti:<db_password>@raspay.gcouf.mongodb.net/raspay?retryWrites=true&w=majority&appName=raspay
