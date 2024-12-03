@@ -16,7 +16,6 @@ import reactor.core.publisher.Mono;
 public class ProductController {
     private final ProductService productService;
     @PostMapping
-
     public ResponseEntity<Mono<Void>> create(@RequestBody ProductDto productDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(productDto).then());
     }
@@ -28,5 +27,14 @@ public class ProductController {
     @GetMapping("/{acronym}")
     public ResponseEntity<Mono<Product>> findByAcronym(@PathVariable String acronym){
         return ResponseEntity.status(HttpStatus.OK).body(productService.findByAcronym(acronym));
+    }
+
+    @GetMapping("/name/{name}")
+    public  ResponseEntity<Flux<Product>> findAllByName(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findByName(name));
+    }
+    @GetMapping("/params")
+    public  ResponseEntity<Flux<Product>> findAllByParams(@RequestParam(value = "name",required = false,defaultValue = "") String name,@RequestParam(value = "acronym",required = false,defaultValue = "") String acronym,@RequestParam(value = "currentPrice",required = false,defaultValue = "") String currentPrice){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByParams(acronym,name,currentPrice));
     }
 }
