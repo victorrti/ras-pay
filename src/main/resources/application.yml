@@ -4,3 +4,5 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://victorrodriguesti:2ZdLwHyg2RONs8HS@raspay.gcouf.mongodb.net/raspay?retryWrites=true&w=majority&appName=raspay
+  webFlux:
+    base-path: /raspay-api
