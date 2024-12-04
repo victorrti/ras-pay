@@ -2,6 +2,7 @@ package com.raspay.wsraspayapi.repository;
 
 import com.raspay.wsraspayapi.model.Custumer;
 import com.raspay.wsraspayapi.model.Product;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -16,5 +17,5 @@ public interface ProductRepository extends ReactiveMongoRepository<Product,Strin
     Mono<Product> findByAcronym(String acronym);
 
     @Query("{name:{$regex:'^?0',$options:'i'}}")
-    Flux<Product> findByName(@Param("name") String name);
+    Flux<Product> findByName(@Param("name") String name, Pageable pageable);
 }

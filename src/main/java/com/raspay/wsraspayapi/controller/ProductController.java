@@ -30,11 +30,18 @@ public class ProductController {
     }
 
     @GetMapping("/name/{name}")
-    public  ResponseEntity<Flux<Product>> findAllByName(@PathVariable String name){
-        return ResponseEntity.status(HttpStatus.OK).body(productService.findByName(name));
+    public  ResponseEntity<Flux<Product>> findAllByName(@PathVariable String name,
+                                                        @RequestParam(value = "pageNumber",required = false,defaultValue = "") int pageNumber,
+                                                        @RequestParam(value = "pageSize",required = false,defaultValue = "") int pageSize
+                                                        ){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findByName(name,pageNumber,pageSize));
     }
     @GetMapping("/params")
-    public  ResponseEntity<Flux<Product>> findAllByParams(@RequestParam(value = "name",required = false,defaultValue = "") String name,@RequestParam(value = "acronym",required = false,defaultValue = "") String acronym,@RequestParam(value = "currentPrice",required = false,defaultValue = "") String currentPrice){
-        return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByParams(acronym,name,currentPrice));
+    public  ResponseEntity<Flux<Product>> findAllByParams(@RequestParam(value = "name",required = false,defaultValue = "") String name,
+                                                          @RequestParam(value = "acronym",required = false,defaultValue = "") String acronym,
+                                                          @RequestParam(value = "currentPrice",required = false,defaultValue = "") String currentPrice,
+                                                          @RequestParam(value = "pageNumber",required = false,defaultValue = "") int pageNumber,
+                                                          @RequestParam(value = "pageSize",required = false,defaultValue = "") int pageSize){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByParams(acronym,name,currentPrice,pageNumber,pageSize));
     }
 }

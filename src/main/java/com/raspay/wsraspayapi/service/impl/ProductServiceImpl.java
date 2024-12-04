@@ -7,6 +7,8 @@ import com.raspay.wsraspayapi.repository.ProductRepository;
 import com.raspay.wsraspayapi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -43,12 +45,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Flux<Product> findByName(String name) {
-        return productRepository.findByName(name);
+    public Flux<Product> findByName(String  name,int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+        return productRepository.findByName(name,pageable);
     }
 
     @Override
-    public Flux<Product> findAllByParams(String name, String acronym, String currentPrice) {
+    public Flux<Product> findAllByParams(String name, String acronym, String currentPrice,int pageNumber,int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
         Criteria criteria = new Criteria();
         if(!Objects.equals(acronym,"")){
             criteria.and("acronym").is(acronym);
@@ -59,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
         if(!Objects.equals(acronym,"")){
             criteria.and("currentPrice").is(currentPrice);
         }
-        Query query = new Query();
+        Query query = new Query().with(pageable);
         query.addCriteria(criteria);
 
          return mongoTemplate.find(query,Product.class);
