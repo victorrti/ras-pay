@@ -3,6 +3,7 @@ package com.raspay.wsraspayapi.mapper;
 import com.raspay.wsraspayapi.dto.CustumerDto;
 import com.raspay.wsraspayapi.dto.OrderDto;
 import com.raspay.wsraspayapi.model.Custumer;
+import com.raspay.wsraspayapi.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,5 +12,5 @@ import org.mapstruct.Mapping;
 )
 public interface OrderMapper {
     @Mapping(target="id", ignore = true)
-    Custumer toModel(OrderDto dto);
+    Order toModel(OrderDto dto);
 }
