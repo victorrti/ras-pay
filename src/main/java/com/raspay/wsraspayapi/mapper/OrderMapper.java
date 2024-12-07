@@ -11,6 +11,10 @@ import org.mapstruct.Mapping;
         componentModel = "spring"
 )
 public interface OrderMapper {
+    @Mapping(target = "originalPrice",ignore = true)
+    @Mapping(target = "dtRegisterOrder",ignore = true)
+    @Mapping(target = "custumer",ignore = true)
+    @Mapping(target = "product",ignore = true)
     @Mapping(target="id", ignore = true)
     Order toModel(OrderDto dto);
 }
