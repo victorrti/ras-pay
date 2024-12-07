@@ -6,5 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface CustumerService {
 
+    Mono<Custumer> findById(String id);
+
     Mono<Custumer> create(CustumerDto dto);
 }

@@ -15,8 +15,25 @@ import reactor.core.publisher.Mono;
 public class CustumerServiceImpl implements CustumerService {
     private final CustumerRepository custumerRepository;
     private final CustumerMapper custumerMapper;
+
+    @Override
+    public Mono<Custumer> findById(String id) {
+        return custumerRepository.findById(id)
+                .switchIfEmpty(Mono.error(new RuntimeException("Custumer not found")));
+    }
+
     @Override
     public Mono<Custumer> create(CustumerDto dto) {
-        return custumerRepository.save(custumerMapper.toModel(dto));
+        return custumerRepository.findByEmail(dto.email())
+                .flatMap(custumer ->{
+                    custumer.setFirstName(dto.firstName());
+                    custumer.setLastName(dto.lastName());
+                    return custumerRepository.save(custumer);
+                } ).switchIfEmpty(
+                        custumerRepository.save(custumerMapper.toModel(dto))
+
+                );
+
+
     }
 }
