@@ -1,5 +1,6 @@
 package com.raspay.wsraspayapi.model;
 
+import com.raspay.wsraspayapi.enums.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 public class Payment {
     @Id
     private String id;
-    private String status;
+    private PaymentStatus status;
     private LocalDateTime dtRegistredPayment;
     @DBRef
     private CreditCard creditCard;
