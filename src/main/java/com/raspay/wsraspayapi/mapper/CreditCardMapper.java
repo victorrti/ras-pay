@@ -8,6 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CreditCardMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "custumer", ignore = true)
+    @Mapping(target = "custumerId", ignore = true)
     CreditCard toModel(CreditCardDto dto);
 }

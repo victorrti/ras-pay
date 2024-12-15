@@ -24,7 +24,7 @@ public class CreditCard {
     private int year;
     private String documentNumber;
     private int installments;
-    @DBRef
-    private Custumer custumer;
+
+    private String custumerId;
 
 }

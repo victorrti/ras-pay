@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     private String id;
-    @DBRef
-    private Custumer custumer;
+
+    private String custumerId;
     private BigDecimal originalPrice;
     private BigDecimal descount;
     private LocalDateTime dtRegisterOrder;
-    @DBRef
-    private Product product;
+
+    private String productId;
 }

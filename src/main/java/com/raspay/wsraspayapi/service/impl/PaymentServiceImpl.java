@@ -52,15 +52,15 @@ public class PaymentServiceImpl implements PaymentService {
     private Mono<Payment> savePayment(Custumer custumer, Order order, CreditCard creditCard,PaymentStatus status) {
         var payemntBuilder = Payment.builder();
         payemntBuilder.dtRegistredPayment(LocalDateTime.now())
-                .order(order)
-                .custumer(custumer)
+                .orderId(order.getId())
+                .custumerId(custumer.getId())
                 .status(status)
-                .creditCard(creditCard);
+                .creditCardId(creditCard.getId());
         return paymentRepository.save(payemntBuilder.build());
     }
 
     private Mono<Payment> autoridPayment(Custumer custumer, Order order, CreditCard creditCard) {
-        if(creditCard.getCustumer().getId().equals(order.getId())
+        if(creditCard.getCustumerId().equals(order.getId())
                 || creditCard.getDocumentNumber().equals(custumer.getCpf())){
             return savePayment(custumer,order,creditCard,PaymentStatus.APROVED);
 

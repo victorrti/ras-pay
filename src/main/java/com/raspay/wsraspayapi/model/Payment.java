@@ -21,12 +21,12 @@ public class Payment {
     private String id;
     private PaymentStatus status;
     private LocalDateTime dtRegistredPayment;
-    @DBRef
-    private CreditCard creditCard;
-    @DBRef
-    private Custumer custumer;
-    @DBRef
-    private Order order;
+
+    private String creditCardId;
+
+    private String custumerId;
+
+    private String orderId;
 
 
 
