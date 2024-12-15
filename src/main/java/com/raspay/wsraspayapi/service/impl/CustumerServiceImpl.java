@@ -1,6 +1,7 @@
 package com.raspay.wsraspayapi.service.impl;
 
 import com.raspay.wsraspayapi.dto.CustumerDto;
+import com.raspay.wsraspayapi.exception.NotFoundException;
 import com.raspay.wsraspayapi.mapper.CustumerMapper;
 import com.raspay.wsraspayapi.mapper.ProductMapper;
 import com.raspay.wsraspayapi.model.Custumer;
@@ -19,7 +20,7 @@ public class CustumerServiceImpl implements CustumerService {
     @Override
     public Mono<Custumer> findById(String id) {
         return custumerRepository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Custumer not found")));
+                .switchIfEmpty(Mono.error(new NotFoundException("Custumer not found")));
     }
 
     @Override
